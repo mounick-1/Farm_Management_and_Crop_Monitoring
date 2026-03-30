@@ -1,1 +1,0 @@
-# Farm_Management_and_Crop_Monitoring
