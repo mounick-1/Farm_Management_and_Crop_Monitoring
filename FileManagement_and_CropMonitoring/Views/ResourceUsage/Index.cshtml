@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FarmManagement_and_CropMonitoring.Models.ResourceUsage>
+
+@{
+    ViewData["Title"] = "Usage History";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Resource Usage Logs</h1>
+        <a asp-action="Create" class="btn btn-warning">Record New Usage</a>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Date</th>
+                <th>Crop Name</th>
+                <th>Resource Used</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.DateUsed.ToShortDateString()</td>
+                        <td>@(item.Crop?.CropName ?? "N/A")</td>
+                        <td>@(item.Resource?.ResourceName ?? "N/A")</td>
+                        <td>@item.QuantityUsed @(item.Resource?.Unit ?? "")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center">No usage logs found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,45 @@
+﻿@model FarmManagement_and_CropMonitoring.Models.Crop
+
+@{
+    ViewData["Title"] = "Add New Crop";
+}
+
+<div class="container mt-4">
+    <h1>Add New Crop</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div class="form-group mb-3">
+                    <label asp-for="CropName" class="control-label">Crop Name</label>
+                    <input asp-for="CropName" class="form-control" placeholder="e.g. Basmati Rice" />
+                    <span asp-validation-for="CropName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="CropType" class="control-label">Category</label>
+                    <input asp-for="CropType" class="form-control" placeholder="e.g. Grain, Vegetable" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Season" class="control-label">Season</label>
+                    <input asp-for="Season" class="form-control" placeholder="e.g. Kharif, Rabi" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="FieldId" class="control-label">Assign to Field</label>
+                    @* This dropdown pulls from the ViewBag.FieldId we set in the Controller *@
+                    <select asp-for="FieldId" class="form-control" asp-items="ViewBag.FieldId">
+                        <option value="">-- Select a Field --</option>
+                    </select>
+                    <span asp-validation-for="FieldId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Save Crop</button>
+                    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model FarmManagement_and_CropMonitoring.Models.Resource
+
+<div class="container mt-4">
+    <h1>Add New Resource</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div class="form-group mb-3">
+                    <label asp-for="ResourceName" class="control-label"></label>
+                    <input asp-for="ResourceName" class="form-control" placeholder="e.g. Urea, Organic Manure" />
+                    <span asp-validation-for="ResourceName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Category" class="control-label"></label>
+                    <input asp-for="Category" class="form-control" placeholder="e.g. Fertilizer, Pesticide, Seeds" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="QuantityInStock" class="control-label">Quantity</label>
+                    <input asp-for="QuantityInStock" class="form-control" type="number" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Unit" class="control-label"></label>
+                    <input asp-for="Unit" class="form-control" placeholder="e.g. kg, Liters, Bags" />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Add to Inventory</button>
+                    <a asp-action="Index" class="btn btn-secondary">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

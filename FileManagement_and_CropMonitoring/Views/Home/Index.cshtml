@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Farm Dashboard";
+}
+
+<div class="container mt-5">
+    <div class="p-5 mb-4 bg-dark text-white rounded-3 shadow-lg">
+        <div class="container-fluid py-2">
+            <h1 class="display-4 fw-bold">Farm Management System</h1>
+            <p class="fs-4 text-light-50">Precision monitoring for land, crops, and resource consumption.</p>
+            <hr class="my-4 border-secondary">
+            <a asp-controller="PlantSchedule" asp-action="Index" class="btn btn-success btn-lg">View Planting Calendar</a>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-3 mb-4">
+            <div class="card bg-primary text-white shadow-sm border-0 h-100 dashboard-card">
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <h1 class="display-3 fw-bold">@ViewBag.FieldCount</h1>
+                    <p class="text-uppercase mb-3">Total Fields</p>
+                    <a asp-controller="Field" asp-action="Index" class="btn btn-light btn-sm w-100">Manage Land</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card bg-success text-white shadow-sm border-0 h-100 dashboard-card">
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <h1 class="display-3 fw-bold">@ViewBag.CropCount</h1>
+                    <p class="text-uppercase mb-3">Active Crops</p>
+                    <a asp-controller="Crop" asp-action="Index" class="btn btn-light btn-sm w-100">Crop Catalog</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card bg-info text-white shadow-sm border-0 h-100 dashboard-card">
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <h1 class="display-3 fw-bold">@ViewBag.ResourceCount</h1>
+                    <p class="text-uppercase mb-3">Resource Types</p>
+                    <a asp-controller="Resource" asp-action="Index" class="btn btn-light btn-sm w-100">Inventory</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card bg-warning text-dark shadow-sm border-0 h-100 dashboard-card">
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <h1 class="display-3 fw-bold">@ViewBag.RecentUsage</h1>
+                    <p class="text-uppercase mb-3">Usage Logs</p>
+                    <a asp-controller="ResourceUsage" asp-action="Index" class="btn btn-dark btn-sm w-100">History</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    }
+</style>

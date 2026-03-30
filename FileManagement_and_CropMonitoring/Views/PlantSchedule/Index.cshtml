@@ -1,0 +1,59 @@
+﻿@model IEnumerable<FarmManagement_and_CropMonitoring.Models.PlantSchedule>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Planting Calendar</h1>
+        <a asp-action="Create" class="btn btn-success">Schedule New Planting</a>
+    </div>
+
+    <table class="table table-hover border">
+        <thead class="table-dark">
+            <tr>
+                <th>Crop</th>
+                <th>Field</th>
+                <th>Planting Date</th>
+                <th>Expected Harvest</th>
+                <th>Progress</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                // Calculation Logic Start
+                var totalDays = (item.EndDate - item.StartDate).TotalDays;
+                var daysPassed = (DateTime.Now - item.StartDate).TotalDays;
+    
+                // Clamp the percentage between 0 and 100
+                var percent = totalDays > 0 ? (int)Math.Clamp((daysPassed / totalDays) * 100, 0, 100) : 0;
+                // Calculation logic end
+
+                <tr>
+                    <td><strong>@item.Crop?.CropName</strong></td>
+                    <td>@item.Field?.FieldName</td>
+                    <td>@item.StartDate.ToShortDateString()</td>
+                    <td>@item.EndDate.ToShortDateString()</td>
+                    <td style="width: 25%;">
+                        @if (percent >= 100)
+                        {
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-success" style="width: 100%">100%</div>
+                            </div>
+                            <span class="badge bg-danger mt-1">Ready to Harvest!</span>
+                        }
+                        else
+                        {
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
+                                     role="progressbar"
+                                     style="width: @percent%">
+                                    @percent%
+                                </div>
+                            </div>
+                            <small class="text-muted">@((int)(totalDays - daysPassed)) days remaining</small>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
