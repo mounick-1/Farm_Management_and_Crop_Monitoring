@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using FarmManagement_and_CropMonitoring.Models;
+﻿using FarmManagement_and_CropMonitoring.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 namespace FarmManagement_and_CropMonitoring.Data
 {
@@ -11,6 +12,7 @@ namespace FarmManagement_and_CropMonitoring.Data
         }
 
         // Register your tables here
+        public DbSet<User> Users { get; set; }
         public DbSet<Field> Fields { get; set; }
         public DbSet<Crop> Crops { get; set; }
         public DbSet<Resource> Resources { get; set; }
@@ -34,8 +36,12 @@ namespace FarmManagement_and_CropMonitoring.Data
                 .HasOne(p => p.Field)
                 .WithMany(f => f.PlantSchedules)
                 .HasForeignKey(p => p.FieldId)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
             // This prevents the "Multiple Cascade Paths" error
+            // This ensures AreaHectares has 18 digits total and 2 after the decimal(e.g., 100.25)
+    modelBuilder.Entity<Field>()
+        .Property(f => f.AreaHectares)
+        .HasColumnType("decimal(18,2)");
         }
     }
 }
